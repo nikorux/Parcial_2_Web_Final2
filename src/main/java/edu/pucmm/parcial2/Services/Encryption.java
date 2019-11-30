@@ -1,5 +1,4 @@
 package edu.pucmm.parcial2.Services;
-
 import sun.misc.*;
 
 import javax.crypto.Cipher;
@@ -14,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Encryption {
     static final String vector = "8547963214569874"; // This has to be 16 characters
-    static final String secretKey= "parcial2web";
+    static final String secretKey= "practicafinal47";
 
     private static String md5(final String input) throws NoSuchAlgorithmException {
 
