@@ -135,7 +135,7 @@ public class mainHandler {
             return new ModelAndView(attributes, "statPage.ftl");
         }, freeMarkerEngine);
 
-        private User CreateSession(Request request, User user) {
+        private User CreateSession (Request request, User user){
             Session session = request.session(true);
             if (user == null) {
                 aux = UserServices.getInstancia().getUser(session.id());
@@ -149,7 +149,7 @@ public class mainHandler {
             return user;
         }
 
-        private String getSo(String userAgent) {
+        private String getSo (String userAgent){
             String so;
             if (userAgent.contains("android")) {
                 so = "Android";
@@ -168,7 +168,7 @@ public class mainHandler {
             return so;
         }
 
-        private String getBrowser(String userAgent) {
+        private String getBrowser (String userAgent){
             String browser;
             if (userAgent.contains("ie") || userAgent.contains("rv")) {
                 browser = "IE";
@@ -185,3 +185,64 @@ public class mainHandler {
             }
             return browser;
         }
+
+        private List<Groupby> groupbyBrowser (List < Visit > visits) {
+            List<Groupby> chart_val = new ArrayList<>();
+            for (Visit visit :
+                    visits) {
+                auxi = find(chart_val, visit.getBrowser());
+                if (auxi != -1) {
+                    auxi2 = chart_val.get(auxi).getValue();
+                    chart_val.get(auxi).setValue(auxi2 + 1);
+                } else {
+                    chart_val.add(new Groupby(visit.getBrowser(), 1));
+                }
+            }
+            return chart_val;
+        }
+
+        private List<Groupby> groupbySo (List < Visit > visits) {
+            List<Groupby> chart_val = new ArrayList<>();
+            for (Visit visit :
+                    visits) {
+                auxi = find(chart_val, visit.getSo());
+                if (auxi != -1) {
+                    auxi2 = chart_val.get(auxi).getValue();
+                    chart_val.get(auxi).setValue(auxi2 + 1);
+                } else {
+                    chart_val.add(new Groupby(visit.getSo(), 1));
+                }
+            }
+            return chart_val;
+        }
+
+        private List<Groupby> groupbyDate (List < Visit > visits) {
+            List<Groupby> chart_val = new ArrayList<>();
+            for (Visit visit :
+                    visits) {
+                auxi = find(chart_val, visit.getFechaS());
+                if (auxi != -1) {
+                    auxi2 = chart_val.get(auxi).getValue();
+                    chart_val.get(auxi).setValue(auxi2 + 1);
+                } else {
+                    chart_val.add(new Groupby(visit.getFechaS(), 1));
+                }
+            }
+            return chart_val;
+        }
+
+        private List<Groupby> groupbyIP (List < Visit > visits) {
+            List<Groupby> chart_val = new ArrayList<>();
+            for (Visit visit :
+                    visits) {
+                auxi = find(chart_val, visit.getIp());
+                if (auxi != -1) {
+                    auxi2 = chart_val.get(auxi).getValue();
+                    chart_val.get(auxi).setValue(auxi2 + 1);
+                } else {
+                    chart_val.add(new Groupby(visit.getIp(), 1));
+                }
+            }
+            return chart_val;
+        }
+    }
