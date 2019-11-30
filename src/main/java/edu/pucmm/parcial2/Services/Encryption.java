@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Encryption {
     static final String vector = "8547963214569874"; // This has to be 16 characters
-    static final String secretKey= "practicafinal47";
+    static final String secretKey= "parcial2web";
 
     private static String md5(final String input) throws NoSuchAlgorithmException {
 
