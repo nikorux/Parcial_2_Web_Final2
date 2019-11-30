@@ -1,5 +1,6 @@
 package edu.pucmm.parcial2.Encapsulation;
 
+
 public class Groupby {
     private String name;
     private int value;
