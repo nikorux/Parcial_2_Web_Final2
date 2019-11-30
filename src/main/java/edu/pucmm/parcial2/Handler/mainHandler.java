@@ -58,3 +58,79 @@ public class mainHandler {
                 response.redirect(ret_val.getUrl());
             }
         });
+        get("/", (request, response) -> {
+            StartUser();
+            String user = request.cookie("LoginU");
+            if (user != null) {
+                String passw = Encryption.Decrypt(request.cookie("LoginP"));
+                String usern = Encryption.Decrypt(user);
+                currentUser = UserServices.getInstancia().getUser(usern, passw);
+                CreateSession(request, currentUser);
+            }
+            currentUser = getSessionUsuario(request);
+            if (currentUser == null)
+                currentUser = CreateSession(request, null);
+
+            Map<String, Object> attributes = validateUser();
+            return new ModelAndView(attributes, "home.ftl");
+        }, freeMarkerEngine);
+
+        get("/LogIn/", (request, response) -> {
+            Map<String, Object> attributes = validateUser();
+            return new ModelAndView(attributes, "signin.ftl");
+        }, freeMarkerEngine);
+
+        post("/logInUser/", (request, response) -> {
+            User user = UserServices.getInstancia().getUser(request.queryParams("username"), encryptPassword(request.queryParams("password")));
+            System.out.println(request.queryParams("username") + ": " + encryptPassword(request.queryParams("password")));
+            if (user != null) {
+                CreateSession(request, user);
+                boolean remember = Boolean.parseBoolean(request.queryParams("remember"));
+                if (remember) {
+                    response.cookie("/", "LoginU", Encryption.Encrypt(user.getUsername()), 604800, false);
+                    response.cookie("/", "LoginP", Encryption.Encrypt(user.getPassword()), 604800, false);
+                }
+                response.redirect("/");
+            } else {
+                response.redirect("/LogIn/");
+            }
+            return null;
+        }, freeMarkerEngine);
+
+        get("/Register/", (request, response) -> {
+            Map<String, Object> attributes = validateUser();
+            return new ModelAndView(attributes, "register.ftl");
+        }, freeMarkerEngine);
+
+        post("/registerUser/", (request, response) -> {
+            User u = new User(request.queryParams("username"),
+                    request.queryParams("name"),
+                    encryptPassword(request.queryParams("password")),
+                    Boolean.parseBoolean(request.queryParams("admin")));
+            UserServices.getInstancia().insert(u);
+            CreateSession(request, u);
+            response.redirect("/");
+            return null;
+        }, freeMarkerEngine);
+
+        post("/generateUrl", (request, response) -> {
+            currentUser = getSessionUsuario(request);
+            Url fu = gson.fromJson(request.body(), Url.class);
+            Url returned_val = generateURL(fu.getUrl());
+            UrlServices.getInstancia().insert(returned_val);
+            return null;
+        }, JsonTransformer.json());
+
+        get("/AllUrls/", (request, response) -> {
+            Map<String, Object> attributes = validateUser();
+            return new ModelAndView(attributes, "urlList.ftl");
+        }, freeMarkerEngine);
+
+        get("/StatsUrl/:id", (request, response) -> {
+            Map<String, Object> attributes = validateUser();
+            Url url = UrlServices.getInstancia().buscar(Long.parseLong(request.params("id")));
+            attributes.put("clickNum", url.getVisits().size());
+            attributes.put("urlId", request.params("id"));
+            attributes.put("url", url.getUrl());
+            return new ModelAndView(attributes, "statPage.ftl");
+        }, freeMarkerEngine);
