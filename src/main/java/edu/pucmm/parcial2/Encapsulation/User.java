@@ -36,7 +36,6 @@ public class User implements Serializable {
         this.admin = admin;
         this.urls = new HashSet<>();
     }
-
     public User(String username, boolean admin) {
         this.username = username;
         this.name = name;
