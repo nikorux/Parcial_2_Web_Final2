@@ -148,3 +148,40 @@ public class mainHandler {
             session.attribute("usuario", user);
             return user;
         }
+
+        private String getSo(String userAgent) {
+            String so;
+            if (userAgent.contains("android")) {
+                so = "Android";
+            } else if (userAgent.contains("iphone")) {
+                so = "iPhone";
+            } else if (userAgent.contains("windows")) {
+                so = "Windows";
+            } else if (userAgent.contains("macintosh")) {
+                so = "Macintosh";
+            } else if (userAgent.contains("linux")) {
+                so = "Linux";
+            } else {
+                so = "UnKnown";
+            }
+
+            return so;
+        }
+
+        private String getBrowser(String userAgent) {
+            String browser;
+            if (userAgent.contains("ie") || userAgent.contains("rv")) {
+                browser = "IE";
+            } else if (userAgent.contains("opr") || userAgent.contains("opera")) {
+                browser = "Opera";
+            } else if (userAgent.contains("chrome")) {
+                browser = "Chrome";
+            } else if (userAgent.contains("firefox")) {
+                browser = "Firefox";
+            } else if (userAgent.contains("safari")) {
+                browser = "Safari";
+            } else {
+                browser = "Other";
+            }
+            return browser;
+        }
