@@ -25,21 +25,13 @@
 </#if>
 <div class="container">
     <div class="py-3 text-center">
-        <h2>Log in</h2>
+        <h2>REGISTRATE</h2>
     </div>
     <div class="row justify-content-lg-center">
         <div class="col col-lg-3">
-            <form class="needs-validation" method="post" action="/registerUser/">
+            <form class="needs-validation" method="post" action="/logInUser/">
                 <div class="row">
-                    <div class="mb-2" style="width: 100%;">
-                        <label for="firstName">Nombre</label>
-                        <input type="text" class="form-control" name="name" width="col-md-auto" required>
-                        <div class="invalid-feedback">
-                            Primer nombre es requerido
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+                    <div id="id"></div>
                     <div class="mb-2" style="width: 100%;">
                         <label for="firstName">Nombre usuario</label>
                         <input type="text" class="form-control" name="username" width="col-md-auto" required>
@@ -57,13 +49,11 @@
                         </div>
                     </div>
                 </div>
-                <#if usuario =="admin">
-                    <div class="row">
-                        <div style="width: 100%;" class="mb-2">
-                            <input type="checkbox" name="admin" value="true"> Este usuario es <strong>Admin</strong><br>
-                        </div>
+                <div class="row">
+                    <div style="width: 100%;" class="mb-2">
+                        <input type="checkbox" name="remember" value="true"> Recordarme <br>
                     </div>
-                </#if>
+                </div>
                 <hr>
                 <button class="btn btn-primary btn-md btn-block" type="submit" id="sendButton">Enviar</button>
             </form>
