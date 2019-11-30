@@ -12,6 +12,7 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 public class Encryption {
     static final String vector = "8547963214569874"; // This has to be 16 characters
     static final String secretKey= "parcial2";
