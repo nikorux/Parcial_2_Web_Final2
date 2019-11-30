@@ -134,3 +134,17 @@ public class mainHandler {
             attributes.put("url", url.getUrl());
             return new ModelAndView(attributes, "statPage.ftl");
         }, freeMarkerEngine);
+
+        private User CreateSession(Request request, User user) {
+            Session session = request.session(true);
+            if (user == null) {
+                aux = UserServices.getInstancia().getUser(session.id());
+                if (aux == null) {
+                    user = new User(session.id(), false);
+                    UserServices.getInstancia().insert(user);
+                } else
+                    user = aux;
+            }
+            session.attribute("usuario", user);
+            return user;
+        }
