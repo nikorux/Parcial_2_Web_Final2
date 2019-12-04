@@ -30,7 +30,7 @@ public class mainHandler {
 
     static Usuario currentUsuario = new Usuario();
     Gson gson = new Gson();
-    static String ip_val, hex_val, new_url, base_url = "http://localhost:4567/ne/";
+    static String ip_val, hex_val, new_url, base_url = "/";
 
     static Url url_value;
     Usuario aux;
