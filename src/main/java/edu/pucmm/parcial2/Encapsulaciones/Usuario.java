@@ -15,7 +15,7 @@ public class Usuario implements Serializable {
     private String password;
     private boolean admin;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
     private Set<Url> urls;
 
     public Usuario() {
