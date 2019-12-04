@@ -40,19 +40,19 @@ public class mainHandler {
     public void startup() {
 
 
-//        ProcessBuilder processBuilder = new ProcessBuilder();
-//        if (processBuilder.environment().get("PORT") != null) {
-//            port(Integer.parseInt(processBuilder.environment().get("PORT")));
-//        }else{
-//            port(8080);
-//        }
-//
-//
-//        staticFiles.location("/publico");
-//
-//        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
-//        configuration.setClassForTemplateLoading(mainHandler.class, "/templates");
-//        FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            port(Integer.parseInt(processBuilder.environment().get("PORT")));
+        }else{
+            port(8080);
+        }
+
+
+        staticFiles.location("/publico");
+
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
+        configuration.setClassForTemplateLoading(mainHandler.class, "/templates");
+        FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
         before("/ne/*", (request, response) -> {
             String redirect = base_url + request.uri().split("/")[2];
