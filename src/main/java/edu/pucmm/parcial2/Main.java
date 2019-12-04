@@ -11,13 +11,14 @@ import static spark.Spark.staticFiles;
 public class Main {
     public static void main(String[] args) throws Exception {
 
+        StartDatabase.getInstancia().startDb();
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
             port(Integer.parseInt(processBuilder.environment().get("PORT")));
         }else{
             port(8080);
         }
-        StartDatabase.getInstancia().startDb();
+
 
         staticFiles.location("/publico");
 
