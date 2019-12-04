@@ -1,0 +1,1 @@
+web: java -jar  build/libs/Parcial_2_Web_Final-1.0-SNAPSHOT.jar

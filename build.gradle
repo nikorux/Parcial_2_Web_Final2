@@ -14,36 +14,21 @@ apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceCompatibility = 1.8
-group 'edu.pucmm.parcial2'
-version '1.0-SNAPSHOT'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
-    }
-}
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
-
-sourceCompatibility = 1.8
 mainClassName = "edu.pucmm.parcial2.Main"
 
 repositories {
     mavenCentral()
 }
+task stage {
+    dependsOn shadowJar
+
+}
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
-    //Librerias de Hibernate
     compile 'org.hibernate:hibernate-core:5.4.1.Final'
     compile 'org.hibernate:hibernate-entitymanager:5.4.1.Final'
-    //Driver de la conexion...
     compile 'com.h2database:h2:1.4.197'
-    //Spark
     compile 'com.sparkjava:spark-core:2.7.2'
     compile 'com.sparkjava:spark-template-freemarker:2.7.1'
     compile 'org.freemarker:freemarker:2.3.26-incubating'
