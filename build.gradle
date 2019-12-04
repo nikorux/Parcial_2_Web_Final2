@@ -1,13 +1,5 @@
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
-
 group 'edu.pucmm.parcial2'
 version '1.0-SNAPSHOT'
-
-
-sourceCompatibility = 1.8
-mainClassName = "edu.pucmm.parcial2.Main"
 
 buildscript {
     repositories {
@@ -17,11 +9,21 @@ buildscript {
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
     }
 }
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
+sourceCompatibility = 1.8
+mainClassName = "edu.pucmm.parcial2.Main"
+
+repositories {
+    mavenCentral()
+}
 task stage {
     dependsOn shadowJar
 
 }
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
