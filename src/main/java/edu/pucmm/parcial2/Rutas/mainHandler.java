@@ -50,7 +50,7 @@ public class mainHandler {
 
         staticFiles.location("/publico");
 
-        Configuration configuration = new Configuration(new Version(2, 3, 0));
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(mainHandler.class, "/templates");
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
