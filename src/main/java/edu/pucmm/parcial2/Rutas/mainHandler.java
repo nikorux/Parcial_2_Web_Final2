@@ -55,7 +55,7 @@ public class mainHandler {
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
         before("/", (request, response) -> {
-            String redirect = base_url + request.uri().split("/")[2];
+            String redirect = base_url + request.uri();
             Url ret_val = UrlServices.getInstancia().getUrl(redirect);
             if (ret_val == null)
                 response.redirect("/");
