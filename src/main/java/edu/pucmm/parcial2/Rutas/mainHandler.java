@@ -54,7 +54,7 @@ public class mainHandler {
         configuration.setClassForTemplateLoading(mainHandler.class, "/templates");
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
-        after("/ne/*", (request, response) -> {
+        after("*/ne/*", (request, response) -> {
             String redirect = base_url + request.uri().split("/")[2];
             Url ret_val = UrlServices.getInstancia().getUrl(redirect);
             if (ret_val == null)
