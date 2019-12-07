@@ -30,7 +30,7 @@ public class mainHandler {
 
     static Usuario currentUsuario = new Usuario();
     Gson gson = new Gson();
-    static String ip_val, hex_val, new_url, base_url = "/ne/*";
+    static String ip_val, hex_val, new_url, base_url = "/ne/";
 
     static Url url_value;
     Usuario aux;
@@ -54,7 +54,7 @@ public class mainHandler {
         configuration.setClassForTemplateLoading(mainHandler.class, "/templates");
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
-        before("/ne/*", (request, response) -> {
+        before("/ne/", (request, response) -> {
             String redirect = base_url + request.uri().split("/")[2];
             Url ret_val = UrlServices.getInstancia().getUrl(redirect);
             if (ret_val == null)
